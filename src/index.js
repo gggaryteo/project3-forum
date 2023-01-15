@@ -6,18 +6,18 @@ import './index.css';
 
 // Import Route Components
 import App from "./App";
-import Home from './routeComponents/Home';
-import HomePosts  from './routeComponents/HomePosts';
-import Login  from './routeComponents/Login';
-import Register  from './routeComponents/Register';
-import EditProfile from './routeComponents/EditProfile';
-import CreatePost from './routeComponents/CreatePost';
-import Post from './routeComponents/Post/Post';
-import CommentSection  from './routeComponents/Post/CommentSection';
-import Profile from './routeComponents/Profile/Profile';
-import ProfilePosts  from './routeComponents/Profile/ProfilePosts';
-import ProfileFavoritePosts  from './routeComponents/Profile/ProfileFavoritePosts';
-import ErrorNotFound from './routeComponents/ErrorNotFound';
+import Home from './Components/Home';
+import HomePosts  from './Components/HomePosts';
+import Login  from './Components/Login';
+import Signup  from './Components/Signup';
+import EditProfile from './Components/EditProfile';
+import CreatePost from './Components/CreatePost';
+import Post from './Components/Post/Post';
+import CommentSection  from './Components/Post/CommentSection';
+import Profile from './Components/Profile/Profile';
+import ProfilePosts  from './Components/Profile/ProfilePosts';
+import ProfileFavoritePosts  from './Components/Profile/ProfileFavoritePosts';
+import ErrorNotFound from './Components/ErrorNotFound';
 
 
 // Notes: Index Routes for
@@ -35,7 +35,7 @@ root.render(
           </Route>
 
           <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="register" element={<Signup />} />
 
           <Route path="editprofile" element={<EditProfile />} />
 
