@@ -9,7 +9,7 @@ import App from "./App";
 import Home from './Components/Home';
 import HomePosts  from './Components/HomePosts';
 import Login  from './Components/Login';
-import Signup  from './Components/Signup';
+import Signup  from './routes/Signup';
 import EditProfile from './Components/EditProfile';
 import CreatePost from './Components/CreatePost';
 import Post from './Components/Post/Post';
@@ -19,45 +19,45 @@ import ProfilePosts  from './Components/Profile/ProfilePosts';
 import ProfileFavoritePosts  from './Components/Profile/ProfileFavoritePosts';
 import ErrorNotFound from './Components/ErrorNotFound';
 
+// Import Context
+import AuthProvider from './context/AuthContext';
 
-// Notes: Index Routes for
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        
-        <Route element={<App />}>
-          {/* Note: render child route at the parent route level so all posts will be shown*/}
-          <Route path="/" element={<Home />}>
-            <Route index element={<HomePosts />} />
+      <AuthProvider>
+        <Routes>
+          <Route element={<App />}>
+            {/* Note: render child route at the parent route level so all posts will be shown*/}
+            <Route path="/" element={<Home />}>
+              <Route index element={<HomePosts />} />
+            </Route>
+
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Signup />} />
+
+            <Route path="editprofile" element={<EditProfile />} />
+
+            <Route path="createpost" element={<CreatePost />}>
+              <Route path=":slug" element={<CreatePost />} />
+            </Route>
+
+            {/* Note: render child route at the parent route level so all comments will be shown*/}
+            <Route path="post/:slug" element={<Post />}>
+              <Route index element={<CommentSection />} />
+            </Route>
+
+            <Route path="profile/:username" element={<Profile />}>
+              <Route index element={<ProfilePosts />} />
+              <Route path="favorites" element={<ProfileFavoritePosts />} />
+            </Route>
           </Route>
 
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Signup />} />
-
-          <Route path="editprofile" element={<EditProfile />} />
-
-          <Route path="createpost" element={<CreatePost />}>
-            <Route path=":slug" element={<CreatePost />} />
-          </Route>
-
-          {/* Note: render child route at the parent route level so all comments will be shown*/}
-          <Route path="post/:slug" element={<Post />}>
-            <Route index element={<CommentSection />} />
-          </Route>
-
-          <Route path="profile/:username" element={<Profile />}>
-            <Route index element={<ProfilePosts />} />
-            <Route path="favorites" element={<ProfileFavoritePosts />} />
-          </Route>
-
-        </Route>
-
-        <Route path="*" element={<ErrorNotFound />} />
-
-      </Routes>
+          <Route path="*" element={<ErrorNotFound />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

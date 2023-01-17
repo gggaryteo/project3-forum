@@ -72,10 +72,12 @@ textarea {
 }
 
 .error {
+  width: 500px;
   color: red;
   background: pink;
   border: 1px solid red;
   border-radius: 4px;
   padding: 8px;
-  margin: 10px 0;
+  margin: 0 auto;
+  text-align: center;
 }
