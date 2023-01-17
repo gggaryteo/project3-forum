@@ -8,7 +8,7 @@ import './index.css';
 import App from "./App";
 import Home from './Components/Home';
 import HomePosts  from './Components/HomePosts';
-import Login  from './Components/Login';
+import Login  from './routes/Login';
 import Signup  from './routes/Signup';
 import EditProfile from './Components/EditProfile';
 import CreatePost from './Components/CreatePost';

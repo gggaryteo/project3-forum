@@ -3,16 +3,15 @@ import { useNavigate } from "react-router";
 
 // import Context, Hooks
 import { useAuth } from "../context/AuthContext";
-import userSignUp from "../services/userSignUp";
+import userLogin from "../services/userLogin";
 
 // import styles
 
-function SignupForm ({ onError }){
+function LoginForm({ onError }) {
   // const [username, setUsername] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [{ username, email, password }, setForm] = useState({
-    username: "",
     email: "",
     password: "",
   });
@@ -24,34 +23,22 @@ function SignupForm ({ onError }){
     event.preventDefault();
     console.log({ username, email, password });
 
-    userSignUp({username, email, password})
+    userLogin({ email, password })
       .then(setAuthState)
       .then(() => navigate("/"))
       .catch(onError);
   };
 
-    const handleInput = (e) => {
-      const name = e.target.name;
-      const value = e.target.value;
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-      setForm((form) => ({ ...form, [name]: value }));
-    };
+    setForm((form) => ({ ...form, [name]: value }));
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
-
-      <label>
-        <span>Enter username:</span>
-        <input
-          name="username"
-          required
-          type="text"
-          placeholder="Your Name"
-          value={username}
-          onChange={handleInput}
-        />
-      </label>
+      <h2>Login</h2>
 
       <label>
         <span>Enter email:</span>
@@ -62,6 +49,7 @@ function SignupForm ({ onError }){
           placeholder="Email"
           value={email}
           onChange={handleInput}
+          autoFocus
         />
       </label>
 
@@ -77,9 +65,9 @@ function SignupForm ({ onError }){
           minLength="8"
         />
       </label>
-      <button className="btn">Create Account</button>
+      <button className="btn">Login</button>
     </form>
   );
-};
+}
 
-export default SignupForm;
+export default LoginForm;
