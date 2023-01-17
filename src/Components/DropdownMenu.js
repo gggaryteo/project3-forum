@@ -36,6 +36,8 @@ import { Link } from "react-router-dom";
     setAuthState(userLogout);
   };
 
+  const userInitial = username.charAt(0).toUpperCase();
+
    return (
      <>
        <Tooltip title="Account settings">
@@ -48,7 +50,7 @@ import { Link } from "react-router-dom";
            aria-expanded={open ? "true" : undefined}
            style={{marginRight: "70px"}}
          >
-           <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>
+           <Avatar sx={{ width: 32, height: 32 }}>{profileimage ? profileimage : userInitial}</Avatar>
          </IconButton>
        </Tooltip>
 
