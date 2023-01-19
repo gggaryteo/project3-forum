@@ -12,7 +12,7 @@ async function userLogin({ email, password }) {
     const { user } = data;
     const headers = { Authorization: `Token ${user.token}` };
 
-    const loggedIn = { headers, isAuth: true, loggedUser: user };
+    const loggedIn = { headers, isAuth: true, loggedUser: user , username: user.username};
 
     localStorage.setItem("loggedUser", JSON.stringify(loggedIn));
 

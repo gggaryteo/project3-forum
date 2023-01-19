@@ -4,6 +4,7 @@ import axios from "axios";
 import TagSection from "../Components/Home/TagSection";
 import "../Components/Home/Home.css";
 import CardPost from "../Components/Home/Card";
+import { GlobalChat } from "../Components/GlobalChat/GlobalChat";
 
 const Home = () => {
   const [postdata, getPostData] = useState([]);
