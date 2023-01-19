@@ -45,6 +45,9 @@ const Home = () => {
       <div>
         <TagSection />
       </div>
+      <div>
+        <GlobalChat />
+      </div>
     </div>
   );
 };
