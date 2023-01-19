@@ -7,18 +7,18 @@ import './index.css';
 
 // Import Route Components
 import App from "./App";
-import Home from './Components/Home';
-import HomePosts  from './Components/HomePosts';
+import Home from './routes/Home';
+import HomePosts  from './routes/HomePosts';
 import Login  from './routes/Login';
 import Signup  from './routes/Signup';
-import EditProfile from './Components/EditProfile';
-import CreatePost from './Components/CreatePost';
-import Post from './Components/Post/Post';
-import CommentSection  from './Components/Post/CommentSection';
-import Profile from './Components/Profile/Profile';
-import ProfilePosts  from './Components/Profile/ProfilePosts';
-import ProfileFavoritePosts  from './Components/Profile/ProfileFavoritePosts';
-import ErrorNotFound from './Components/ErrorNotFound';
+import EditProfile from './routes/EditProfile';
+import CreatePost from './routes/CreatePost';
+import Post from './routes/Post/Post';
+import CommentSection  from './routes/Post/CommentSection';
+import Profile from './routes/Profile/Profile';
+import ProfilePosts  from './routes/Profile/ProfilePosts';
+import ProfileFavoritePosts  from './routes/Profile/ProfileFavoritePosts';
+import ErrorNotFound from './routes/ErrorNotFound';
 
 // Import Context
 import AuthProvider from './context/AuthContext';
