@@ -1,5 +1,8 @@
 import React, { useRef, useState, ReactDOM, useEffect } from 'react'
 import Container from '@mui/material/Container'
+import { Button } from '@mui/material'
+import { Send } from '@mui/icons-material'
+import "./GlobalChat.css"
 
 import { io } from "socket.io-client"
 
@@ -62,7 +65,7 @@ export const GlobalChat = () => {
 
   return (
     <>
-        <div>
+        <div style={{width:"350px"}}>
             <Container id="chat" ref={chatRef} sx={{
                 width: "350px",
                 height: "400px",
@@ -77,13 +80,14 @@ export const GlobalChat = () => {
                     )
                   })
                 }
-                
             </Container>
             <Container>
               {data !== null ? 
-              <form onSubmit={(e)=>{handleSubmit(e)}}>
+              <form style={{display:"flex"}}>
                 <input type={"text"} value={input} onChange={(e)=>{setInput(e.target.value)}}/>
-                <input type={"submit"} placeholder={"get foonged"}/>
+                <Button onClick={(e)=>{handleSubmit(e)}} variant="contained" endIcon={<Send />}>
+                  Send
+                </Button>
               </form> : "Please log in to chat"}
               {inputError === "" ? "" : <span style={{color:"red"}}>{inputError}</span>}
             </Container>

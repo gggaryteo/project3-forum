@@ -1,5 +1,5 @@
 import React from "react";
-import { GlobalChat } from "./GlobalChat/GlobalChat";
+import { GlobalChat } from "../Components/GlobalChat/GlobalChat";
 
 const Home = () => {
   return (
