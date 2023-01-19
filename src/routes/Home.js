@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import TagSection from "./TagSection";
-import "./Homepage.css";
-import CardPost from "./Card";
+import TagSection from "../Components/Home/TagSection";
+import "../Components/Home/Home.css";
+import CardPost from "../Components/Home/Card";
 
-const Homepage = () => {
+const Home = () => {
   const [postdata, getPostData] = useState([]);
 
   useEffect(() => {
@@ -48,4 +48,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Home;
