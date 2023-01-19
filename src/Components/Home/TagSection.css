@@ -1,0 +1,33 @@
+.tagContainer {
+  /* border: 1px solid black; */
+  border-style: outset;
+  background-color: rgb(194, 187, 187);
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 350px;
+}
+
+.tagHeader {
+  align-self: center;
+  margin-top: 10px;
+}
+.tagBox {
+  margin: 15px;
+  align-self: center;
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  width: 300px;
+}
+
+.tagItem {
+  border: 2px solid rgb(211, 207, 207);
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  margin: 10px 0px 10px 5px;
+  font-weight: bolder;
+  font-size: 16px;
+  align-self: center;
+}
