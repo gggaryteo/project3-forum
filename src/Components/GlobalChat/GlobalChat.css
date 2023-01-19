@@ -2,21 +2,39 @@
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+    }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
+}
+
+
+.chatContainer{
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    background-color:white; 
+    border:solid black 1px;
+    width: 350px;
+}
+
+.chatContainer.open{
+    bottom: 0px;
+}
+
+.chatContainer.close{
+    bottom: -437px;
+}

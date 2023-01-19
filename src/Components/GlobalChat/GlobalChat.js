@@ -1,7 +1,7 @@
 import React, { useRef, useState, ReactDOM, useEffect } from 'react'
 import Container from '@mui/material/Container'
-import { Button } from '@mui/material'
-import { Send } from '@mui/icons-material'
+import { Badge, Button, IconButton } from '@mui/material'
+import { Send, ArrowDropDownSharp, ArrowDropUpSharp } from '@mui/icons-material'
 import "./GlobalChat.css"
 
 import { io } from "socket.io-client"
@@ -21,6 +21,8 @@ export const GlobalChat = () => {
   const [inputError,setInputError] = useState("")
   const [messageLog, setMessageLog] = useState([])
   const chatRef = useRef(null)
+  const [chatView,setChatView] = useState(true)
+  const chatContainerRef = useRef(null)
 
   // getting localstorage data, mainly to check if user is logged in or not
   const data = JSON.parse(localStorage.getItem('loggedUser'))
@@ -63,16 +65,52 @@ export const GlobalChat = () => {
     setInputError("")
   }
 
+  const closeChat = () => {
+    const dom = chatContainerRef.current
+    dom.classList.remove("open")
+    dom.classList.add("close")
+    setChatView(false)
+  }
+
+  const openChat = () => {
+    const dom = chatContainerRef.current
+    dom.classList.remove("close")
+    dom.classList.add("open")
+    setChatView(true)
+  }
+
   return (
     <>
-        <div style={{width:"350px"}}>
+        <div ref={chatContainerRef} className='chatContainer'>
+            <Container sx={{
+              display:"flex",
+              backgroundColor:"gray",
+              height:"40px",
+              alignItems:"center",
+              justifyContent:"space-between",
+            }}>
+              Chat 
+              {chatView === true ? 
+                <IconButton onClick={()=>{closeChat()}}>
+                <Badge badgeContent={0} color="secondary">
+                  <ArrowDropDownSharp />
+                </Badge>
+                </IconButton> : 
+                <IconButton onClick={()=>{openChat()}}>
+                  <Badge badgeContent={0} color="secondary">
+                    <ArrowDropUpSharp />
+                  </Badge>
+                </IconButton>
+              }
+              
+              
+            </Container>
             <Container id="chat" ref={chatRef} sx={{
                 width: "350px",
                 height: "400px",
                 overflow:"auto",
                 paddingInline:"12px !important",
                 paddingBlock:"10px",
-                border:"solid black 1px",
             }}>
                 {messageLog.length === 0 ? "No messages yet": messageLog.map((obj) => {
                   return (
@@ -81,7 +119,7 @@ export const GlobalChat = () => {
                   })
                 }
             </Container>
-            <Container>
+            <Container sx={{paddingInline:"0px !important"}}>
               {data !== null ? 
               <form style={{display:"flex"}}>
                 <input type={"text"} value={input} onChange={(e)=>{setInput(e.target.value)}}/>
