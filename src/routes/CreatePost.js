@@ -1,8 +1,11 @@
 import React from 'react'
+import CreatePostForm from "../Components/CreatePostForm";
 
 const CreatePost = () => {
   return (
-    <div>CreatePost</div>
+    <div>
+      <CreatePostForm />
+    </div>
   )
 }
 

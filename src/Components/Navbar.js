@@ -6,7 +6,7 @@ import ProjectLogo from "../assets/Foongrum.png";
 // import packages
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaSignInAlt, FaUserPlus } from "react-icons/fa";
+import { FaHome, FaPen, FaSignInAlt, FaUserPlus } from "react-icons/fa";
 
 // import misc
 import { useAuth } from "../context/AuthContext";
@@ -30,6 +30,7 @@ function Navbar() {
 
           {isAuth && (
             <>
+              <NavLink to="/createpost"> <FaPen /> New Post</NavLink>
               <DropdownMenu />
             </>
           )}
