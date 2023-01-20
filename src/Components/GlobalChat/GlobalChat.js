@@ -5,15 +5,18 @@ import { Send, ArrowDropDownSharp, ArrowDropUpSharp } from '@mui/icons-material'
 import "./GlobalChat.css"
 
 import { io } from "socket.io-client"
+import axios from 'axios'
 
 
 //Socket.io is a living creature, and the react environment is a nuclear wasteland.
 //Theres a reason socket.io is outside of said nuclear wasteland. I can't quite explain why, but there is. (infinite loops)
+const socket = io('http://localhost:3002')
+
 
 export const GlobalChat = () => {
   
   // this is dangerous af but i need it to fix a bug where chat doesnt appear after login
-  const socket = io('http://localhost:3002')
+
 
 
   // declaring states
@@ -27,12 +30,32 @@ export const GlobalChat = () => {
   // getting localstorage data, mainly to check if user is logged in or not
   const data = JSON.parse(localStorage.getItem('loggedUser'))
 
+  // experimental
+
+  // const [socket, setSocket] = useState(null)
+  // useEffect(()=> {
+  //   const newSocket = io(`http://localhost:3002`);
+  //   setSocket(newSocket);
+
+
+  //   return () => newSocket.close();
+  // },[setSocket])  
+
+
+
   // useEffects are required if socket is defined inside the react environment
-  useEffect(()=> {
-    socket.on('retrive-chat', (log)=>{
-      console.log("retrive-chat")
-      setMessageLog(log)
-    })
+  useEffect(() => {
+    // socket.on('retrive-chat', (log)=>{
+    //   console.log("retrive-chat")
+    //   setMessageLog(log)
+    // })
+    let chat 
+    const retriveChat = async () => {
+      chat = await axios.get("http://localhost:3001/api/chat/getChat")
+      console.log("chat.data", chat.data)
+      setMessageLog(chat.data)
+    }
+    retriveChat()
   },[])
 
   useEffect(()=>{
@@ -57,9 +80,9 @@ export const GlobalChat = () => {
     }
 
     // updating message log locally
-    setMessageLog([...messageLog, {message: input, user: data.username}])
+    setMessageLog([...messageLog, {message: input, user: data.loggedUser.username}])
     // updating message log server side
-    socket.emit('send-message', input, data.username)
+    socket.emit('send-message', input, data.loggedUser.username)
 
     setInput("")
     setInputError("")
