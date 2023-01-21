@@ -18,7 +18,8 @@ import { Link } from "react-router-dom";
  function DropdownMenu() {
 
   const { loggedUser, setAuthState } = useAuth();
-  const { username, profileimage } = loggedUser || {};
+  const { username, profileimg } = loggedUser || {};
+  console.log(profileimg)
 
   // for dropdown menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,7 +51,7 @@ import { Link } from "react-router-dom";
            aria-expanded={open ? "true" : undefined}
            style={{marginRight: "70px"}}
          >
-           <Avatar sx={{ width: 32, height: 32 }}>{profileimage ? profileimage : userInitial}</Avatar>
+           <Avatar sx={{ width: 45, height: 42 }} src={profileimg}> {userInitial} </Avatar>
          </IconButton>
        </Tooltip>
 
@@ -99,14 +100,14 @@ import { Link } from "react-router-dom";
            <ListItemIcon>
              <Settings fontSize="small" />
            </ListItemIcon>
-           Settings
+           <Link to="/editprofile" style={{ textDecoration: 'none' }}>Settings</Link>
          </MenuItem>
 
          <MenuItem>
            <ListItemIcon>
              <Logout fontSize="small" />
            </ListItemIcon>
-           <Link onClick={handleLogout}> Logout </Link>
+           <Link onClick={handleLogout} style={{ textDecoration: 'none' }}> Logout </Link>
          </MenuItem>
 
        </Menu>
