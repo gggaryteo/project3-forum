@@ -193,9 +193,10 @@ export default function CardPost(props) {
             height: 150,
             margin: auto,
             backgroundColor: "rgb(245, 245, 245)",
+            overflow: "auto"
           }}
         >
-          <Typography component={"div"} variant="body2" color="text.secondary">
+          <Typography component={"div"} variant="body2" color="text.secondary" sx={{ overflow: "auto" }}>
             {props.description}
           </Typography>
         </CardContent>

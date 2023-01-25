@@ -11,6 +11,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import './Home.css'
 
 const Home = () => {
   const [trendingpostdata, setTrendingPostData] = useState({});
@@ -115,8 +116,11 @@ const Home = () => {
           selectedStates={selectedStates}
           clearTagSelection={clearTagSelection}
         />
-
-        <div>current selected tags: {`${selectedStates}`}</div>
+        <div className="tags">
+          <p>
+            <a href="#" className="color5"> Tags: {`${selectedStates}`}</a>
+          </p>
+        </div>
       </div>
 
       <div>
