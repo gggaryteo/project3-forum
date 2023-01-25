@@ -21,9 +21,9 @@ export default function TagSection() {
       <div className="tagBox">
         {tags.map((tag) => {
           return (
-            <p key={tag} className="tagItem">
+            <div key={tag} className="tagItem">
               {tag}
-            </p>
+            </div>
           );
         })}
       </div>

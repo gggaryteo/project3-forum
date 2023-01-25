@@ -3,7 +3,10 @@ import errorHandler from "../helpers/errorHandler";
 
 async function getUser({ headers }) {
   try {
-    const { data } = await axios({ headers, url: "http://localhost:3001/api/user" });
+    const { data } = await axios({
+      headers,
+      url: "http://localhost:3001/api/user",
+    });
 
     return data.user;
   } catch (error) {

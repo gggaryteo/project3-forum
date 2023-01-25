@@ -5,9 +5,59 @@ import TagSection from "../Components/Home/TagSection";
 import "../Components/Home/Home.css";
 import CardPost from "../Components/Home/Card";
 import { GlobalChat } from "../Components/GlobalChat/GlobalChat";
+import { useAuth } from "../context/AuthContext";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const Home = () => {
   const [postdata, getPostData] = useState([]);
+  const [userpostdata, setUserPostData] = useState([]);
+  const { isAuth, headers, loggedUser } = useAuth();
+
+  /// START ///
+  // Helper functions for Tab CSS //
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography component={"div"}>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  }
+  /// END ///
 
   useEffect(() => {
     const getPosts = async () => {
@@ -20,26 +70,68 @@ const Home = () => {
       }
     };
 
+    const getUserPosts = async () => {
+      try {
+        const user_posts = await axios.get(
+          `http://localhost:3001/api/post/${loggedUser.email}`
+        );
+        setUserPostData(user_posts.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getPosts();
+    if (isAuth) {
+      getUserPosts();
+    }
   }, []);
 
   return (
     <div className="body">
       <div>
-        <div>
-          <h1 className="header">Global Feed</h1>
-          <hr styles="width:650px" />
-        </div>
-        {postdata.map((post) => (
-          <div>
-            <CardPost
-              title={post.title}
-              date={post.createdAt}
-              description={post.content}
-              author={post.user_id}
-            />
-          </div>
-        ))}
+        <Box sx={{ width: "100%" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label="Global Feed" {...a11yProps(0)} />
+              <Tab label="Trending " {...a11yProps(1)} />
+              {isAuth ? <Tab label="Your Posts" {...a11yProps(2)} /> : null}
+            </Tabs>
+          </Box>
+
+          <TabPanel value={value} index={0}>
+            {postdata.map((post) => (
+              <div key={post.id}>
+                <CardPost
+                  post_id={post.id}
+                  title={post.title}
+                  date={post.createdAt}
+                  description={post.content}
+                  author={post.user_id}
+                />
+              </div>
+            ))}
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            Item 2
+          </TabPanel>
+
+          <TabPanel value={value} index={2}>
+            {userpostdata.map((post) => (
+              <div key={post.id}>
+                <CardPost
+                  title={post.title}
+                  date={post.createdAt}
+                  description={post.content}
+                  author={post.user_id}
+                />
+              </div>
+            ))}
+          </TabPanel>
+        </Box>
       </div>
 
       <div>
