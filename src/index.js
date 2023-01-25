@@ -8,7 +8,6 @@ import "./index.css";
 // Import Route Components
 import App from "./App";
 import Home from "./routes/Home";
-import HomePosts from "./routes/HomePosts";
 import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import EditProfile from "./routes/EditProfile";
@@ -32,7 +31,6 @@ root.render(
           <Route element={<App />}>
             {/* Note: render child route at the parent route level so all posts will be shown*/}
             <Route path="/" element={<Home />}>
-              {/* <Route index element={<HomePosts />} /> */}
             </Route>
 
             <Route path="login" element={<Login />} />

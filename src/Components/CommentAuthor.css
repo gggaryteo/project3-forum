@@ -1,0 +1,10 @@
+.comment-author-img{
+  border: solid;
+  border-width: 1px;
+  margin-right: 5px;
+}
+
+.comment-card {
+  display: flex;
+  align-items: center;
+}

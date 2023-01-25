@@ -11,6 +11,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [trendingpostdata, setTrendingPostData] = useState({});
@@ -101,7 +102,7 @@ const Home = () => {
     if (isAuth) {
       getUserPosts();
     }
-  }, []);
+  }, [isAuth, loggedUser.email]);
 
   const clearTagSelection = () => {
     setSelectedStates([]);
@@ -136,14 +137,18 @@ const Home = () => {
           <TabPanel value={value} index={0}>
             {globalpostdata.map((post) => (
               <div key={post.id}>
-                <CardPost
-                  post_id={post.id}
-                  title={post.title}
-                  date={post.createdAt}
-                  description={post.content}
-                  author={post.user_id}
-                  tags={post.tags}
-                />
+                <Link
+                  to={`/post/${post.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <CardPost
+                    post_id={post.id}
+                    title={post.title}
+                    date={post.createdAt}
+                    description={post.content}
+                    author={post.user_id}
+                  />
+                </Link>
               </div>
             ))}
           </TabPanel>
@@ -152,14 +157,19 @@ const Home = () => {
             {selectedStates.length != 0
               ? trendingpostdata[selectedStates[0]].map((post) => (
                   <div key={post.id}>
-                    <CardPost
-                      post_id={post.id}
-                      title={post.title}
-                      date={post.createdAt}
-                      description={post.content}
-                      author={post.user_id}
-                      tags={post.tags}
-                    />
+                    <Link
+                      to={`/post/${post.slug}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <CardPost
+                        post_id={post.id}
+                        title={post.title}
+                        date={post.createdAt}
+                        description={post.content}
+                        author={post.user_id}
+                        tags={post.tags}
+                      />
+                    </Link>
                   </div>
                 ))
               : null}
@@ -168,13 +178,18 @@ const Home = () => {
           <TabPanel value={value} index={2}>
             {userpostdata.map((post) => (
               <div key={post.id}>
-                <CardPost
-                  post_id={post.id}
-                  title={post.title}
-                  date={post.createdAt}
-                  description={post.content}
-                  author={post.user_id}
-                />
+                <Link
+                  to={`/post/${post.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <CardPost
+                    post_id={post.id}
+                    title={post.title}
+                    date={post.createdAt}
+                    description={post.content}
+                    author={post.user_id}
+                  />
+                </Link>
               </div>
             ))}
           </TabPanel>

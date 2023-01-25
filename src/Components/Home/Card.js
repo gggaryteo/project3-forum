@@ -167,7 +167,7 @@ export default function CardPost(props) {
         width: 650,
         height: 350,
         margin: 2,
-        backgroundColor: "rgb(155,155,155)"
+        backgroundColor: "rgb(155,155,155)",
       }}
     >
       <CardHeader
@@ -182,9 +182,8 @@ export default function CardPost(props) {
           width: 300,
           height: 50,
           fontSize: "small",
-        }}>
-        tags: {props.tags}
-      </CardContent>
+        }}
+      ></CardContent>
       <CardContent
         sx={{
           width: 600,
