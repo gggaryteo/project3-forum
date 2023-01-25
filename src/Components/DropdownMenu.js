@@ -91,7 +91,8 @@ import { Link } from "react-router-dom";
          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
        >
          <MenuItem>
-           <Avatar /> Profile
+           <Avatar />
+           <Link to={`/profile/${username}`} style={{ textDecoration: 'none' }}>Profile</Link>
          </MenuItem>
          
          <Divider />

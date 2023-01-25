@@ -15,8 +15,6 @@ import CreatePost from "./routes/CreatePost";
 import Post from "./routes/Post/Post";
 import CommentSection from "./routes/Post/CommentSection";
 import Profile from "./routes/Profile/Profile";
-import ProfilePosts from "./routes/Profile/ProfilePosts";
-import ProfileFavoritePosts from "./routes/Profile/ProfileFavoritePosts";
 import ErrorNotFound from "./routes/ErrorNotFound";
 
 // Import Context
@@ -48,8 +46,6 @@ root.render(
             </Route>
 
             <Route path="profile/:username" element={<Profile />}>
-              <Route index element={<ProfilePosts />} />
-              <Route path="favorites" element={<ProfileFavoritePosts />} />
             </Route>
           </Route>
 
