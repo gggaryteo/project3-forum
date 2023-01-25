@@ -5,9 +5,17 @@ import postComment from "../services/postComment";
 
 // styles
 import Avatar from "@mui/material/Avatar";
-import { Grid, Button, Card, Stack, TextField, ThemeProvider } from "@mui/material";
+import {
+  Grid,
+  Button,
+  Card,
+  Stack,
+  TextField,
+  ThemeProvider,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import theme from "./CommentFormStyles";
+import "./CommentForm.css";
 
 function CommentForm({ updateComments }) {
   const [{ content }, setForm] = useState({ content: "" });
@@ -82,9 +90,9 @@ function CommentForm({ updateComments }) {
       </Grid>
     </ThemeProvider>
   ) : (
-    <span>
-      <Link to="/login">Sign in</Link> or <Link to="/register">Sign up</Link> to
-      add comments on this article.
+    <span className="center-text-unauth">
+      <Link to="/login" style={{marginRight:"10px"}}>Sign in </Link> or <Link to="/register" style={{marginLeft: "10px", marginRight:"10px"}}> Sign up </Link>
+      to add comments on this post.
     </span>
   );
 }

@@ -100,6 +100,7 @@ function CreatePostForm() {
         <span>Enter tags:</span>
         <input
           placeholder="Enter tags"
+          required
           name="tags"
           value={tagList}
           onChange={tagsInputHandler}
