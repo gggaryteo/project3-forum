@@ -15,6 +15,7 @@ function CommentAuthor({ biography, profileimg, username }) {
         className="comment-author"
         state={{ biography, profileimg, username }}
         to={`/profile/${username}`}
+        style={{textDecoration: "none"}}
       >
         {username}
       </Link>

@@ -93,8 +93,7 @@ function CommentList({ triggerUpdate, updateComments }) {
                     className="trash-button"
                     onClick={() => handleClick(id)}
                   >
-                    {" "}
-                    <FaTrashAlt />{" "}
+                    <FaTrashAlt />
                   </button>
                 )}
               </List>
