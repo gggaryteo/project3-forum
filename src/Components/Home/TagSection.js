@@ -1,12 +1,12 @@
-import React from "react";
+import { Button } from "@mui/material";
+import React, { useRef, useState, useEffect } from "react";
 import "./TagSection.css";
-import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function TagSection(props) {
   // retrieve list of tags from backend
   const [tagData, setTagData] = useState({});
-  const [sortedTag, setSortedTag] = useState([]);
+  const [tags, setSortedTag] = useState([]);
 
   useEffect(() => {
     const getTagData = async () => {
@@ -38,13 +38,49 @@ export default function TagSection(props) {
     sortTagData(tagData);
   }, [tagData]);
 
+  // frontend tag filtering states
+  const [searchInput, setSearchInput] = useState("");
+  const tagsRef = useRef(null);
+
+  // frontend tag filtering function
+  const filterSelection = (input) => {
+    const tags = tagsRef.current.getElementsByClassName("tagItem");
+
+    for (const tag of tags) {
+      let classes = tag.className;
+      classes = classes.replace("tagItem ", "");
+      if (classes.indexOf(input) === -1) {
+        tag.classList.add("hide");
+      } else {
+        tag.classList.remove("hide");
+      }
+    }
+  };
+
+  // https://www.w3schools.com/howto/howto_js_filter_elements.asp
+
   return (
     <div className="tagContainer">
-      <h2 className="tagHeader">Tags</h2>
-      <div className="tagBox">
-        {sortedTag.map((tag) => {
+      <div className="tagHeader">
+        <h2 style={{ marginRight: "10px" }}>Tags</h2>
+        <input
+          placeholder="Search..."
+          type={"text"}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
+        ></input>
+        <Button
+          onClick={() => filterSelection(`${searchInput}`)}
+          variant="outlined"
+        >
+          Search
+        </Button>
+      </div>
+      <div className="tagBox" ref={tagsRef}>
+        {tags.map((tag) => {
           return (
-            <div key={tag} className="tagItem">
+            <div key={tag} className={`tagItem ${tag}`}>
               {tag}
             </div>
           );

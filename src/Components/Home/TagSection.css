@@ -1,25 +1,32 @@
 .tagContainer {
   /* border: 1px solid black; */
-  border-style: outset;
+  /* border-style: outset; */
   background-color: rgb(194, 187, 187);
   display: flex;
   flex-direction: column;
-  height: 300px;
-  width: 350px;
+  
+  /* height: 300px; */
+  width: 99.5vw;
+
 }
 
 .tagHeader {
   align-self: center;
+  justify-content: center;
   margin-top: 10px;
+  display: flex;
+  flex-direction: row;
 }
 .tagBox {
-  margin: 15px;
+  /* margin: 15px; */
+  overflow: auto;
   align-self: center;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   display: flex;
-  flex-wrap: wrap;
-  height: 200px;
-  width: 300px;
+  width: 100vw;
+  /* justify-content: center; */
+  /* height: 200px; */
+  /* width: 300px; */
 }
 
 .tagItem {
@@ -30,4 +37,20 @@
   font-weight: bolder;
   font-size: 16px;
   align-self: center;
+  padding: 5px;
+  white-space: nowrap;
+  display: block;
+  /* display: flex; */
+  /* flex-wrap: nowrap; */
+  /* height: fit-content; */
+  /* width: fit-content; */
+}
+
+.tagItem.hide {
+  display: none;
+}
+
+.tagItem:hover{
+  cursor: pointer;
+  background-color: rgb(221, 215, 215);
 }

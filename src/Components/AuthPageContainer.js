@@ -4,7 +4,7 @@ function AuthPageContainer({ children, error, path, text}) {
   console.log(error);
   return (
     <div>
-      <p style={{textAlign:"center"}}><Link to={path}>{text}</Link></p>
+      <p style={{marginBlock:"20px" ,textAlign:"center"}}><Link to={path}>{text}</Link></p>
           {error && <div className="error">{error}</div>}
           {children}
     </div>

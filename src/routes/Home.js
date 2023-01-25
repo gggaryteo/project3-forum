@@ -88,6 +88,11 @@ const Home = () => {
 
   return (
     <div className="body">
+
+      <div>
+        <TagSection/>
+      </div>
+
       <div>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -135,9 +140,7 @@ const Home = () => {
         </Box>
       </div>
 
-      <div>
-        <TagSection />
-      </div>
+      
       <div>
         <GlobalChat />
       </div>
