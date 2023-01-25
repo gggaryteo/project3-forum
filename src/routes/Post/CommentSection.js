@@ -1,9 +1,22 @@
-import React from 'react'
+import { useState } from "react";
+import CommentForm from "../../Components/CommentForm";
+import CommentList from "../../Components/CommentList";
 
-const CommentSection = () => {
+function CommentSection() {
+  const [comment, setComment] = useState({});
+
+  const handleUpdates = (e) => {
+    setComment(e);
+  };
+
   return (
-    <div>CommentSection</div>
-  )
+    <div>
+      <div>
+        <CommentForm updateComments={handleUpdates} />
+        <CommentList triggerUpdate={comment} updateComments={handleUpdates} />
+      </div>
+    </div>
+  );
 }
 
-export default CommentSection
+export default CommentSection;
