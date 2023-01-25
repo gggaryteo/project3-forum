@@ -13,6 +13,7 @@ function CommentSection() {
     <div>
       <div>
         <CommentForm updateComments={handleUpdates} />
+        <h2 style={{textAlign: "center"}}> Comments: </h2>
         <CommentList triggerUpdate={comment} updateComments={handleUpdates} />
       </div>
     </div>

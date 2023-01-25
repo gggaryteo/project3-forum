@@ -10,7 +10,7 @@ function CommentAuthor({ biography, profileimg, username }) {
         to={`/profile/${username}`}
       >
         <Avatar alt={username} className="comment-author-img" src={profileimg} />
-      </Link>{" "}
+      </Link>
       <Link
         className="comment-author"
         state={{ biography, profileimg, username }}

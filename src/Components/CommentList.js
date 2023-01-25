@@ -6,6 +6,18 @@ import deleteComment from "../services/deleteComment";
 import getComments from "../services/getComments";
 import CommentAuthor from "./CommentAuthor";
 
+// styles
+import './CommentList.css'
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/material";
+import { FaTrashAlt } from "react-icons/fa";
+import { Grid, Card} from "@mui/material";
+
 function CommentList({ triggerUpdate, updateComments }) {
   const [comments, setComments] = useState([]);
   const { headers, isAuth, loggedUser } = useAuth();
@@ -29,23 +41,66 @@ function CommentList({ triggerUpdate, updateComments }) {
   return comments?.length > 0 ? (
     comments.map(({ author, author: { username }, content, createdAt, id }) => {
       return (
-        <div className="card" key={id}>
-          <div className="card-block">
-            <p className="card-text">{content}</p>
-          </div>
-          <div className="card-footer">
-            <CommentAuthor {...author} />
-            <span className="date-posted">{dateFormatter(createdAt)}</span>
-            {isAuth && loggedUser.username === username && (
-              <button
-                className="btn btn-sm btn-outline-secondary pull-xs-right"
-                onClick={() => handleClick(id)}
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ marginBottom: "10px" }}
+        >
+          <Card sx={{ width: "75%" }}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <List
+                sx={{
+                  width: "100%",
+                  maxWidth: 750,
+                  bgcolor: "background.paper",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingLeft: "50px",
+                  paddingRight: "50px",
+                  margin: "10px 0",
+                }}
               >
-                <i className="ion-trash-a"></i>
-              </button>
-            )}
-          </div>
-        </div>
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <CommentAuthor {...author} />
+                  </ListItemAvatar>
+
+                  <ListItemText
+                    primary={content}
+                    secondary={
+                      <>
+                        <Typography
+                          sx={{ display: "inline" }}
+                          component="span"
+                          variant="body2"
+                          color="grey"
+                          fontSize="12px"
+                        >
+                          {dateFormatter(createdAt)}
+                        </Typography>
+                      </>
+                    }
+                  />
+                </ListItem>
+
+                <Divider variant="inset" component="li" />
+
+                {isAuth && loggedUser.username === username && (
+                  <button
+                    className="trash-button"
+                    onClick={() => handleClick(id)}
+                  >
+                    {" "}
+                    <FaTrashAlt />{" "}
+                  </button>
+                )}
+              </List>
+            </Box>
+          </Card>
+        </Grid>
       );
     })
   ) : (
