@@ -13,8 +13,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 const Home = () => {
-  const [postdata, getPostData] = useState([]);
+  const [trendingpostdata, setTrendingPostData] = useState({});
   const [userpostdata, setUserPostData] = useState([]);
+  const [globalpostdata, setGlobalPostData] = useState([]);
   const { isAuth, headers, loggedUser } = useAuth();
   const [selectedStates, setSelectedStates] = useState([]);
 
@@ -61,15 +62,25 @@ const Home = () => {
   /// END ///
 
   useEffect(() => {
-    const getPosts = async () => {
+    const getTrendingPosts = async () => {
       try {
         const posts = await axios.get("http://localhost:3001/api/tag/getAll");
-        let arr = []
-        for (let obj of posts.data){
-          obj.taglist[0].tags = obj.name
-          arr = [...arr, obj.taglist[0]]
+
+        let test = {};
+        for (let obj of posts.data) {
+          test[obj.name] = obj.taglist;
         }
-        getPostData(arr);
+        setTrendingPostData(test);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getGlobalPosts = async () => {
+      try {
+        const posts = await axios.get("http://localhost:3001/api/post/getAll");
+        // console.log(posts.data);
+        setGlobalPostData(posts.data);
       } catch (err) {
         console.log(err);
       }
@@ -85,22 +96,26 @@ const Home = () => {
         console.log(err);
       }
     };
-    getPosts();
+    getTrendingPosts();
+    getGlobalPosts();
     if (isAuth) {
       getUserPosts();
     }
   }, []);
 
   const clearTagSelection = () => {
-    setSelectedStates([])
-  }
+    setSelectedStates([]);
+  };
 
   return (
     <div className="body">
-
       <div>
-        <TagSection setSelectedStates={setSelectedStates} selectedStates={selectedStates} clearTagSelection={clearTagSelection}/>
-        {console.log(selectedStates)}
+        <TagSection
+          setSelectedStates={setSelectedStates}
+          selectedStates={selectedStates}
+          clearTagSelection={clearTagSelection}
+        />
+
         <div>current selected tags: {`${selectedStates}`}</div>
       </div>
 
@@ -119,8 +134,7 @@ const Home = () => {
           </Box>
 
           <TabPanel value={value} index={0}>
-            {console.log(postdata)}
-            {selectedStates.length === 0 ? postdata.map((post)=>(
+            {globalpostdata.map((post) => (
               <div key={post.id}>
                 <CardPost
                   post_id={post.id}
@@ -131,27 +145,24 @@ const Home = () => {
                   tags={post.tags}
                 />
               </div>
-            )) :
-            postdata.filter((post) => (
-              post.tags === selectedStates[0]
-            )).map((post)=>(
-              <div key={post.id}>
-                <CardPost
-                  post_id={post.id}
-                  title={post.title}
-                  date={post.createdAt}
-                  description={post.content}
-                  author={post.user_id}
-                  tags={post.tags}
-                />
-              </div>
-            ))
-            
-            
-            }
+            ))}
           </TabPanel>
+
           <TabPanel value={value} index={1}>
-            Item 2
+            {selectedStates.length != 0
+              ? trendingpostdata[selectedStates[0]].map((post) => (
+                  <div key={post.id}>
+                    <CardPost
+                      post_id={post.id}
+                      title={post.title}
+                      date={post.createdAt}
+                      description={post.content}
+                      author={post.user_id}
+                      tags={post.tags}
+                    />
+                  </div>
+                ))
+              : null}
           </TabPanel>
 
           <TabPanel value={value} index={2}>
@@ -170,7 +181,6 @@ const Home = () => {
         </Box>
       </div>
 
-      
       <div>
         <GlobalChat />
       </div>
