@@ -1,32 +1,48 @@
 import { Button } from "@mui/material";
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import "./TagSection.css";
 export default function TagSection() {
   // retrieve list of tags from backend
+  const [tags,setTags] = useState([])
+
+  const getTags = async () => {
+    let retrivedTags = await axios.get('http://localhost:3001/api/tag/getAll')
+    console.log("taggy waggy",retrivedTags.data)
+    let arr = []
+    for(let tag of retrivedTags.data){
+      arr = [...arr, tag.name]
+    }
+    setTags(arr)
+  }
+
+  useEffect(()=> {
+    getTags()
+  },[])
 
   //pseudo tag data
-  const tags = [
-    "Weather",
-    "Food",
-    "Singapore",
-    "Chinese New Year",
-    "Quantum Mechanics & Engineering",
-    "January",
-    "Money",
-    "USA",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-  ];
+  // const tags = [
+  //   "Weather",
+  //   "Food",
+  //   "Singapore",
+  //   "Chinese New Year",
+  //   "Quantum Mechanics & Engineering",
+  //   "January",
+  //   "Money",
+  //   "USA",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  //   "January",
+  // ];
 
 
   // frontend tag filtering states
