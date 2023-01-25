@@ -44,6 +44,7 @@ export default function CardPost(props) {
         width: 650,
         height: 300,
         margin: 2,
+        backgroundColor: "rgb(155,155,155)"
       }}
     >
       <CardHeader
@@ -66,6 +67,7 @@ export default function CardPost(props) {
           width: 600,
           height: 150,
           margin: auto,
+          backgroundColor: "rgb(245, 245, 245)",
         }}
       >
         <Typography variant="body2" color="text.secondary">

@@ -149,7 +149,7 @@ export const GlobalChat = () => {
                 <Button onClick={(e)=>{handleSubmit(e)}} variant="contained" endIcon={<Send />}>
                   Send
                 </Button>
-              </form> : "Please log in to chat"}
+              </form> : <div className='notLoggedIn'>Please log in to chat</div>}
               {inputError === "" ? "" : <span style={{color:"red"}}>{inputError}</span>}
             </Container>
            

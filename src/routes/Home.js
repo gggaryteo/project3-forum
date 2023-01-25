@@ -25,11 +25,16 @@ const Home = () => {
 
   return (
     <div className="body">
+
       <div>
-        <div>
+        <TagSection />
+      </div>
+
+      <div className="feed">
+        {/* <div>
           <h1 className="header">Global Feed</h1>
           <hr styles="width:650px" />
-        </div>
+        </div> */}
         {postdata.map((post) => (
           <div>
             <CardPost
@@ -42,9 +47,7 @@ const Home = () => {
         ))}
       </div>
 
-      <div>
-        <TagSection />
-      </div>
+      
       <div>
         <GlobalChat />
       </div>
