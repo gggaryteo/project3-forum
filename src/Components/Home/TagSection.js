@@ -26,17 +26,21 @@ export default function TagSection(props) {
       }
     };
 
-    // data input = { "Food" : 2, " Health" : 1}
-    // data output = ["Food", "Health"]
-    const sortTagData = async (data) => {
-      const keys = Object.keys(data);
-      const sortedKeys = keys.sort((a, b) => data[b] - data[a]);
-      setSortedTag(sortedKeys);
-    };
-
     getTagData();
-    sortTagData(tagData);
-  }, [tagData]);
+    
+  }, []);
+
+  useEffect(()=> {
+        // data input = { "Food" : 2, " Health" : 1}
+        // data output = ["Food", "Health"]
+        const sortTagData = async (data) => {
+          const keys = Object.keys(data);
+          const sortedKeys = keys.sort((a, b) => data[b] - data[a]);
+          setSortedTag(sortedKeys);
+        };
+
+        sortTagData(tagData);
+  },[tagData])
 
   // frontend tag filtering states
   const [searchInput, setSearchInput] = useState("");
