@@ -61,9 +61,9 @@ export default function TagSection() {
       <div className="tagBox" ref={tagsRef}>
         {tags.map((tag) => {
           return (
-            <p key={tag} className={`tagItem ${tag}`}>
+            <div key={tag} className={`tagItem ${tag}`}>
               {tag}
-            </p>
+            </div>
           );
         })}
       </div>
