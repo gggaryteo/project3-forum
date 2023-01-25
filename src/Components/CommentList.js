@@ -27,6 +27,8 @@ function CommentList({ triggerUpdate, updateComments }) {
     getComments({ slug }).then(setComments).catch(console.error);
   }, [slug, triggerUpdate]);
 
+  console.log(comments)
+
   const handleClick = (commentId) => {
     if (!isAuth) alert("You need to login first");
 
@@ -48,6 +50,7 @@ function CommentList({ triggerUpdate, updateComments }) {
           alignItems="center"
           justify="center"
           style={{ marginBottom: "10px" }}
+          key={author.id}
         >
           <Card sx={{ width: "75%" }}>
             <Box display="flex" justifyContent="center" alignItems="center">
@@ -64,26 +67,28 @@ function CommentList({ triggerUpdate, updateComments }) {
                 }}
               >
                 <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <CommentAuthor {...author} />
-                  </ListItemAvatar>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <ListItemAvatar>
+                      <CommentAuthor {...author} />
+                    </ListItemAvatar>
 
-                  <ListItemText
-                    primary={content}
-                    secondary={
-                      <>
-                        <Typography
-                          sx={{ display: "inline" }}
-                          component="span"
-                          variant="body2"
-                          color="grey"
-                          fontSize="12px"
-                        >
-                          <p className="comment-date">{dateFormatter(createdAt)}</p>
-                        </Typography>
-                      </>
-                    }
-                  />
+                    <ListItemText
+                      primary={content}
+                      secondary={
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component={"span"}
+                            variant="body2"
+                            color="grey"
+                            fontSize="12px"
+                          >
+                            <span className="comment-date">
+                              {dateFormatter(createdAt)}
+                            </span>
+                          </Typography>
+                      }
+                    />
+                  </div>
                 </ListItem>
 
                 <Divider variant="inset" component="li" />
@@ -103,7 +108,7 @@ function CommentList({ triggerUpdate, updateComments }) {
       );
     })
   ) : (
-    <div>There are no comments yet...</div>
+    <div className="no-comments">There are no comments yet...</div>
   );
 }
 

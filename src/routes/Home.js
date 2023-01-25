@@ -11,6 +11,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [postdata, getPostData] = useState([]);
@@ -88,9 +89,8 @@ const Home = () => {
 
   return (
     <div className="body">
-
       <div>
-        <TagSection/>
+        <TagSection />
       </div>
 
       <div>
@@ -110,13 +110,15 @@ const Home = () => {
           <TabPanel value={value} index={0}>
             {postdata.map((post) => (
               <div key={post.id}>
-                <CardPost
-                  post_id={post.id}
-                  title={post.title}
-                  date={post.createdAt}
-                  description={post.content}
-                  author={post.user_id}
-                />
+                <Link to={`/post/${post.slug}`} style={{textDecoration:"none"}}>
+                  <CardPost
+                    post_id={post.id}
+                    title={post.title}
+                    date={post.createdAt}
+                    description={post.content}
+                    author={post.user_id}
+                  />
+                </Link>
               </div>
             ))}
           </TabPanel>
@@ -127,20 +129,21 @@ const Home = () => {
           <TabPanel value={value} index={2}>
             {userpostdata.map((post) => (
               <div key={post.id}>
-                <CardPost
-                  post_id={post.id}
-                  title={post.title}
-                  date={post.createdAt}
-                  description={post.content}
-                  author={post.user_id}
-                />
+                <Link to={`/post/${post.slug}`} style={{textDecoration:"none"}}>
+                  <CardPost
+                    post_id={post.id}
+                    title={post.title}
+                    date={post.createdAt}
+                    description={post.content}
+                    author={post.user_id}
+                  />
+                </Link>
               </div>
             ))}
           </TabPanel>
         </Box>
       </div>
 
-      
       <div>
         <GlobalChat />
       </div>

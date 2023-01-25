@@ -4,7 +4,6 @@ import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import getPost from "../../services/getPost";
 import PostMeta from '../../Components/PostMeta';
-import Markdown from "markdown-to-jsx";
 
 // styles
 import './Post.css'
@@ -37,11 +36,7 @@ const Post = () => {
           <PostMeta author={author} createdAt={createdAt} />
         </div>
         <h1>{title}</h1>
-        <p>
-          {content && (
-            <Markdown options={{ forceBlock: true }}>{content}</Markdown>
-          )}
-        </p>
+        <p>{content}</p>
       </div>
       <Outlet />
     </div>
