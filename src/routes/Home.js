@@ -90,6 +90,10 @@ const Home = () => {
     <div className="body">
 
       <div>
+        <TagSection/>
+      </div>
+
+      <div>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
