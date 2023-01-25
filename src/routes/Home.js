@@ -90,10 +90,6 @@ const Home = () => {
     <div className="body">
 
       <div>
-        <TagSection />
-      </div>
-
-      <div>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
@@ -128,6 +124,7 @@ const Home = () => {
             {userpostdata.map((post) => (
               <div key={post.id}>
                 <CardPost
+                  post_id={post.id}
                   title={post.title}
                   date={post.createdAt}
                   description={post.content}
