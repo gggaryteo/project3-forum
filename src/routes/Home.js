@@ -123,6 +123,7 @@ const Home = () => {
             {userpostdata.map((post) => (
               <div key={post.id}>
                 <CardPost
+                  post_id={post.id}
                   title={post.title}
                   date={post.createdAt}
                   description={post.content}
