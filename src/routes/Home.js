@@ -84,7 +84,7 @@ const Home = () => {
     if (isAuth) {
       getUserPosts();
     }
-  }, []);
+  }, [isAuth, loggedUser.email]);
 
   return (
     <div className="body">

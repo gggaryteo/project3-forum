@@ -79,7 +79,7 @@ function CommentList({ triggerUpdate, updateComments }) {
                           color="grey"
                           fontSize="12px"
                         >
-                          {dateFormatter(createdAt)}
+                          <p className="comment-date">{dateFormatter(createdAt)}</p>
                         </Typography>
                       </>
                     }
