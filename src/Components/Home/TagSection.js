@@ -26,6 +26,10 @@ export default function TagSection(props) {
       }
     };
 
+    getTagData();
+  }, []);
+
+  useEffect(() => {
     // data input = { "Food" : 2, " Health" : 1}
     // data output = ["Food", "Health"]
     const sortTagData = async (data) => {
@@ -34,7 +38,6 @@ export default function TagSection(props) {
       setSortedTag(sortedKeys);
     };
 
-    getTagData();
     sortTagData(tagData);
   }, [tagData]);
 

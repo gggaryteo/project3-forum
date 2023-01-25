@@ -149,7 +149,7 @@ const Home = () => {
           </TabPanel>
 
           <TabPanel value={value} index={1}>
-            {selectedStates.length != 0
+            {selectedStates.length !== 0
               ? trendingpostdata[selectedStates[0]].map((post) => (
                   <div key={post.id}>
                     <CardPost
