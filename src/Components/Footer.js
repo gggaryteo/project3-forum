@@ -4,52 +4,49 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import './Footer.css'
 
 function Copyright() {
   return (
-      <Typography variant="body2" color="text.secondary">
-        {"Copyright © "}
-        <Link color="inherit" href="#">
-          Foongrum
-        </Link>{" "}
-        {new Date().getFullYear()}
-        {"."}
-      </Typography>
+    <Typography variant="body2" color="text.secondary">
+      {"Copyright © "}
+      <Link color="inherit" href="#">
+        Foongrum
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
   );
 }
 
 export default function StickyFooter() {
   return (
-    <footer className="sticky-footer">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "35vh"
+      }}
+    >
       <CssBaseline />
       <Box
+        component="footer"
         sx={{
-          display: "flex",
-          flexDirection: "column",
+          py: 3,
+          px: 2,
+          mt: "auto",
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[200]
+              : theme.palette.grey[800],
         }}
       >
-
-        <Box
-          component="footer"
-          sx={{
-            py: 3,
-            px: 2,
-            mt: 0,
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography variant="body2">
-              A Rocket Academy Project to learn the PERN stack.
-            </Typography>
-            <Copyright />
-          </Container>
-        </Box>
+        <Container maxWidth="sm">
+          <Typography variant="body2">
+            A Rocket Academy Project to learn the PERN stack.
+          </Typography>
+          <Copyright />
+        </Container>
       </Box>
-    </footer>
+    </Box>
   );
 }
