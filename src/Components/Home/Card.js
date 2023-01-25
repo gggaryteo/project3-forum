@@ -165,7 +165,7 @@ export default function CardPost(props) {
     <Card
       sx={{
         width: 650,
-        height: 300,
+        height: 350,
         margin: 2,
         backgroundColor: "rgb(155,155,155)"
       }}
@@ -177,7 +177,14 @@ export default function CardPost(props) {
         title={props.title}
         subheader={stringDate}
       />
-
+      <CardContent
+        sx={{
+          width: 300,
+          height: 50,
+          fontSize: "small",
+        }}>
+        tags: {props.tags}
+      </CardContent>
       <CardContent
         sx={{
           width: 600,

@@ -16,6 +16,7 @@ const Home = () => {
   const [postdata, getPostData] = useState([]);
   const [userpostdata, setUserPostData] = useState([]);
   const { isAuth, headers, loggedUser } = useAuth();
+  const [selectedStates, setSelectedStates] = useState([]);
 
   /// START ///
   // Helper functions for Tab CSS //
@@ -62,9 +63,13 @@ const Home = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const posts = await axios.get("http://localhost:3001/api/post/getAll");
-        // console.log(posts.data);
-        getPostData(posts.data);
+        const posts = await axios.get("http://localhost:3001/api/tag/getAll");
+        let arr = []
+        for (let obj of posts.data){
+          obj.taglist[0].tags = obj.name
+          arr = [...arr, obj.taglist[0]]
+        }
+        getPostData(arr);
       } catch (err) {
         console.log(err);
       }
@@ -86,11 +91,17 @@ const Home = () => {
     }
   }, []);
 
+  const clearTagSelection = () => {
+    setSelectedStates([])
+  }
+
   return (
     <div className="body">
 
       <div>
-        <TagSection/>
+        <TagSection setSelectedStates={setSelectedStates} selectedStates={selectedStates} clearTagSelection={clearTagSelection}/>
+        {console.log(selectedStates)}
+        <div>current selected tags: {`${selectedStates}`}</div>
       </div>
 
       <div>
@@ -108,7 +119,8 @@ const Home = () => {
           </Box>
 
           <TabPanel value={value} index={0}>
-            {postdata.map((post) => (
+            {console.log(postdata)}
+            {selectedStates.length === 0 ? postdata.map((post)=>(
               <div key={post.id}>
                 <CardPost
                   post_id={post.id}
@@ -116,9 +128,27 @@ const Home = () => {
                   date={post.createdAt}
                   description={post.content}
                   author={post.user_id}
+                  tags={post.tags}
                 />
               </div>
-            ))}
+            )) :
+            postdata.filter((post) => (
+              post.tags === selectedStates[0]
+            )).map((post)=>(
+              <div key={post.id}>
+                <CardPost
+                  post_id={post.id}
+                  title={post.title}
+                  date={post.createdAt}
+                  description={post.content}
+                  author={post.user_id}
+                  tags={post.tags}
+                />
+              </div>
+            ))
+            
+            
+            }
           </TabPanel>
           <TabPanel value={value} index={1}>
             Item 2
