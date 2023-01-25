@@ -14,6 +14,8 @@ import { auto } from "@popperjs/core";
 import { useAuth } from "../../context/AuthContext";
 import getUsername from "../../services/getUsername";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import dateFormatter from "../../helpers/dateFormatter";
 
 export default function CardPost(props) {
   const [likeColor, setLikeColor] = useState("");
@@ -26,7 +28,7 @@ export default function CardPost(props) {
   const [currentUserFav, setCurrentUserFav] = useState(false);
 
   const date = props.date;
-  const stringDate = date.toString();
+  const stringDate = dateFormatter(date);
 
   useEffect(() => {
     const checkLikeStatus = async () => {
@@ -73,7 +75,7 @@ export default function CardPost(props) {
         setAuthorImg(result.data.userimg);
       }
     });
-  }, [currentUserLike]);
+  }, [currentUserLike, currentUserFav]);
 
   /// HANDLE BACKEND LIKE STATUS ///
   const addLikes = async () => {
@@ -170,32 +172,34 @@ export default function CardPost(props) {
         backgroundColor: "rgb(155,155,155)",
       }}
     >
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} alt={author} src={authorImg} />
-        }
-        title={props.title}
-        subheader={stringDate}
-      />
-      <CardContent
-        sx={{
-          width: 300,
-          height: 50,
-          fontSize: "small",
-        }}
-      ></CardContent>
-      <CardContent
-        sx={{
-          width: 600,
-          height: 150,
-          margin: auto,
-          backgroundColor: "rgb(245, 245, 245)",
-        }}
-      >
-        <Typography component={"div"} variant="body2" color="text.secondary">
-          {props.description}
-        </Typography>
-      </CardContent>
+      <Link to={`/post/${props.slug}`} style={{ textDecoration: "none" }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} alt={author} src={authorImg} />
+          }
+          title={props.title}
+          subheader={stringDate}
+        />
+        <CardContent
+          sx={{
+            width: 300,
+            height: 50,
+            fontSize: "small",
+          }}
+        ></CardContent>
+        <CardContent
+          sx={{
+            width: 600,
+            height: 150,
+            margin: auto,
+            backgroundColor: "rgb(245, 245, 245)",
+          }}
+        >
+          <Typography component={"div"} variant="body2" color="text.secondary">
+            {props.description}
+          </Typography>
+        </CardContent>
+      </Link>
 
       <CardActions disableSpacing>
         <IconButton
