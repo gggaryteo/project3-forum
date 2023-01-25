@@ -38,7 +38,7 @@ const Home = () => {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <Typography component={"div"}>{children}</Typography>
           </Box>
         )}
       </div>
@@ -101,10 +101,12 @@ const Home = () => {
               {isAuth ? <Tab label="Your Posts" {...a11yProps(2)} /> : null}
             </Tabs>
           </Box>
+
           <TabPanel value={value} index={0}>
             {postdata.map((post) => (
-              <div>
+              <div key={post.id}>
                 <CardPost
+                  post_id={post.id}
                   title={post.title}
                   date={post.createdAt}
                   description={post.content}
@@ -114,11 +116,12 @@ const Home = () => {
             ))}
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+            Item 2
           </TabPanel>
+
           <TabPanel value={value} index={2}>
             {userpostdata.map((post) => (
-              <div>
+              <div key={post.id}>
                 <CardPost
                   title={post.title}
                   date={post.createdAt}
