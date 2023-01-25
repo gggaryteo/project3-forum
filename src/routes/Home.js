@@ -14,9 +14,11 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [postdata, getPostData] = useState([]);
+  const [trendingpostdata, setTrendingPostData] = useState({});
   const [userpostdata, setUserPostData] = useState([]);
+  const [globalpostdata, setGlobalPostData] = useState([]);
   const { isAuth, headers, loggedUser } = useAuth();
+  const [selectedStates, setSelectedStates] = useState([]);
 
   /// START ///
   // Helper functions for Tab CSS //
@@ -61,11 +63,25 @@ const Home = () => {
   /// END ///
 
   useEffect(() => {
-    const getPosts = async () => {
+    const getTrendingPosts = async () => {
+      try {
+        const posts = await axios.get("http://localhost:3001/api/tag/getAll");
+
+        let test = {};
+        for (let obj of posts.data) {
+          test[obj.name] = obj.taglist;
+        }
+        setTrendingPostData(test);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getGlobalPosts = async () => {
       try {
         const posts = await axios.get("http://localhost:3001/api/post/getAll");
         // console.log(posts.data);
-        getPostData(posts.data);
+        setGlobalPostData(posts.data);
       } catch (err) {
         console.log(err);
       }
@@ -81,16 +97,27 @@ const Home = () => {
         console.log(err);
       }
     };
-    getPosts();
+    getTrendingPosts();
+    getGlobalPosts();
     if (isAuth) {
       getUserPosts();
     }
   }, [isAuth, loggedUser.email]);
 
+  const clearTagSelection = () => {
+    setSelectedStates([]);
+  };
+
   return (
     <div className="body">
       <div>
-        <TagSection />
+        <TagSection
+          setSelectedStates={setSelectedStates}
+          selectedStates={selectedStates}
+          clearTagSelection={clearTagSelection}
+        />
+
+        <div>current selected tags: {`${selectedStates}`}</div>
       </div>
 
       <div>
@@ -108,9 +135,12 @@ const Home = () => {
           </Box>
 
           <TabPanel value={value} index={0}>
-            {postdata.map((post) => (
+            {globalpostdata.map((post) => (
               <div key={post.id}>
-                <Link to={`/post/${post.slug}`} style={{textDecoration:"none"}}>
+                <Link
+                  to={`/post/${post.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <CardPost
                     post_id={post.id}
                     title={post.title}
@@ -122,14 +152,36 @@ const Home = () => {
               </div>
             ))}
           </TabPanel>
+
           <TabPanel value={value} index={1}>
-            Item 2
+            {selectedStates.length != 0
+              ? trendingpostdata[selectedStates[0]].map((post) => (
+                  <div key={post.id}>
+                    <Link
+                      to={`/post/${post.slug}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <CardPost
+                        post_id={post.id}
+                        title={post.title}
+                        date={post.createdAt}
+                        description={post.content}
+                        author={post.user_id}
+                        tags={post.tags}
+                      />
+                    </Link>
+                  </div>
+                ))
+              : null}
           </TabPanel>
 
           <TabPanel value={value} index={2}>
             {userpostdata.map((post) => (
               <div key={post.id}>
-                <Link to={`/post/${post.slug}`} style={{textDecoration:"none"}}>
+                <Link
+                  to={`/post/${post.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <CardPost
                     post_id={post.id}
                     title={post.title}

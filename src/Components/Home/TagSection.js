@@ -76,11 +76,16 @@ export default function TagSection(props) {
         >
           Search
         </Button>
+        <Button onClick={() => props.clearTagSelection()}>Clear</Button>
       </div>
       <div className="tagBox" ref={tagsRef}>
         {tags.map((tag) => {
           return (
-            <div key={tag} className={`tagItem ${tag}`}>
+            <div
+              key={tag}
+              className={`tagItem ${tag}`}
+              onClick={(e) => props.setSelectedStates([e.target.textContent])}
+            >
               {tag}
             </div>
           );
