@@ -40,44 +40,46 @@ function AuthorInfo() {
       <ul className="icons">
         <li>
           <a href="#">
-            
             <FaInstagram className="icon" />
           </a>
         </li>
         <li>
           <a href="#">
-            
             <FaFacebook className="icon" />
           </a>
         </li>
         <li>
           <a href="#">
-            
             <FaTwitter className="icon" />
           </a>
         </li>
         <li>
           <a href="#">
-            
             <FaGithub className="icon" />
           </a>
         </li>
       </ul>
       {biography ? biography : "No biography available"}
-      <button className="button draw-border">
-        {username === loggedUser.username && (
-          <NavLink className="edit-link" to="/editprofile"> Edit Profile </NavLink>
-        )}
-      </button>
+      {username === loggedUser.username ? (
+        <button className="button draw-border">
+          <NavLink className="edit-link" to="/editprofile">
+            {" "}
+            Edit Profile{" "}
+          </NavLink>
+        </button>
+      ) : null}
       <button className="button draw-border">Message</button>
     </div>
   ) : (
     <span className="center-text-unauth">
-      <Link to="/login" style={{ marginRight: "10px", color:"blue"}}>
+      <Link to="/login" style={{ marginRight: "10px", color: "blue" }}>
         Sign in
       </Link>
       or
-      <Link to="/register" style={{ marginLeft: "10px", marginRight: "10px", color:"blue" }}>
+      <Link
+        to="/register"
+        style={{ marginLeft: "10px", marginRight: "10px", color: "blue" }}
+      >
         Sign up
       </Link>
       to see User Profile.
