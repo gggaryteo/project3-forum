@@ -169,7 +169,7 @@ export default function CardPost(props) {
         width: 650,
         height: 350,
         margin: 2,
-        backgroundColor: "rgb(155,155,155)",
+        backgroundColor: "rgb(250,250,250)",
       }}
     >
       <Link to={`/post/${props.slug}`} style={{ textDecoration: "none" }}>
@@ -193,9 +193,10 @@ export default function CardPost(props) {
             height: 150,
             margin: auto,
             backgroundColor: "rgb(245, 245, 245)",
+            overflow: "auto"
           }}
         >
-          <Typography component={"div"} variant="body2" color="text.secondary">
+          <Typography component={"div"} variant="body2" color="text.secondary" sx={{ overflow: "auto" }}>
             {props.description}
           </Typography>
         </CardContent>

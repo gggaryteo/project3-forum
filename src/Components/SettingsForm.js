@@ -89,7 +89,7 @@ function SettingsForm() {
           <span>Update Password:</span>
           <input
             name="password"
-            required
+            type="password"
             value={password}
             onChange={inputHandler}
           />

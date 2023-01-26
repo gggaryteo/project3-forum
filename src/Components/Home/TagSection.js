@@ -76,6 +76,7 @@ export default function TagSection(props) {
         <Button
           onClick={() => filterSelection(`${searchInput}`)}
           variant="outlined"
+          style={{ marginLeft: "10px" }}
         >
           Search
         </Button>
